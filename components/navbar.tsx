@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 import { useRouter } from 'next/router'
 import { signOut, useSession } from "next-auth/react";
 
+
 const navLinks = [
   { title: `Accueil`, path: `/` },
   { title: `Contact`, path: `/contact` }
@@ -33,9 +34,13 @@ const NavBar: React.FC = () => {
 
   if (session) {
     right = (
-      <button onClick={() => signOut()}>
+      <div>
+        <button onClick={() => signOut()}>
           <a>Log out</a>
       </button>
+      <Link href="/profile"><Button variant='contained' sx={{margin: 2}}>Profile</Button></Link>
+      </div>
+      
     )
   }
 
