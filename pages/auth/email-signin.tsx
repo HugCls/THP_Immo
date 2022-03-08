@@ -2,9 +2,12 @@ import { getCsrfToken } from "next-auth/react"
 import Layout from "../../components/Layout"
 
 export default function SignIn({ csrfToken }) {
+
+  
+
   return (
     <Layout>
-      <form method="post" action="/api/auth/signin">
+      <form method="post" action="/api/auth/signin/email">
         <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
         <label>
           Email address
