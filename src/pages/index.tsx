@@ -12,7 +12,7 @@ import BigSection from "../components/BigSection";
 import Image from "next/image";
 import TestimonialSection from "../components/TestimonialSection";
 import { testimonials } from "../data/testimonials";
-import ContactSection from "../components/ContactSection";
+
 
 export default function HomePage(): JSX.Element {
   return (
@@ -24,19 +24,19 @@ export default function HomePage(): JSX.Element {
       >
         {/* <Link href="/react" passHref> */}
         <Button variant="contained" disableElevation sx={{ mr: 2, mt: 2 }}>
-          Get started
+          Se connecter
         </Button>
         {/* </Link> */}
         {/* <Link href="/ios" passHref> */}
         <Button disableElevation sx={{ mr: 2, mt: 2 }}>
-          Contact us
+         S'inscrire
         </Button>
         {/* </Link> */}
       </HeroSection>
       <FeatureContainer>
         <FeatureBlocksContainer>
           <FeatureBlock
-            title="Intuitive"
+            title="Intuitif"
             icon={<PeopleIcon />}
             content={
               <>
@@ -56,8 +56,8 @@ export default function HomePage(): JSX.Element {
             }
           />
           <FeatureBlock
-            title="Cost effective"
-            icon={<CodeIcon />}
+            title="Un réseaux gigantesque"
+            icon={<PeopleIcon />}
             content={
               <>
                 Vitae turpis massa sed elementum tempus egestas. Commodo sed
@@ -82,9 +82,6 @@ export default function HomePage(): JSX.Element {
       </Box>
       <Box sx={{ mb: 8 }}>
         <TestimonialSection testimonials={testimonials} />
-      </Box>
-      <Box sx={{ mb: 4 }}>
-        <ContactSection />
       </Box>
     </Page>
   );
