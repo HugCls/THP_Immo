@@ -3,6 +3,8 @@ import { GetStaticProps } from "next";
 import Layout from "../components/Layout";
 import Post, { PostProps } from "../components/Post";
 import prisma from '../lib/prisma'
+import Link from "next/link";
+import { Button } from "@mui/material";
 
 export const getStaticProps: GetStaticProps = async () => {
   const feed = await prisma.post.findMany({
@@ -30,8 +32,8 @@ const Blog: React.FC<Props> = (props) => {
   return (
     <Layout>
       <div className="page">
-        <h1>Public Feed</h1>
         <main>
+          <Link href="/create"><Button variant='contained' sx={{margin: 2}}>Poster une annonce</Button></Link>
           {props.feed.map((post) => (
             <div key={post.id} className="post">
               <Post post={post} />

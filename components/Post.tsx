@@ -11,6 +11,8 @@ export type PostProps = {
   } | null;
   content: string;
   published: boolean;
+  city: string;
+  price: number;
 };
 
 const Post: React.FC<{ post: PostProps }> = ({ post }) => {
