@@ -1,6 +1,4 @@
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import models from "../../lib/models";
 
 export default async (req, res) => {
   const {
@@ -10,7 +8,7 @@ export default async (req, res) => {
     image,
   } = req.body;
   try {
-    const updateUser = await prisma.user.update({
+    const updateUser = await models.user.update({
       where: {
         id: parseInt(id),
       },
@@ -23,8 +21,5 @@ export default async (req, res) => {
     res.status(200).json(updateUser);
   } catch (error) {
     res.status(403).json({ err: "Error occurred while updating user." });
-  }
-  finally {
-    async () => await prisma.$disconnect()
   }
 };
