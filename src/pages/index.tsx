@@ -33,7 +33,7 @@ export default function HomePage(): JSX.Element {
         {/* </Link> */}
       </HeroSection>
       <FeatureContainer>
-        <FeatureBlocksContainer>
+        <FeatureBlocksContainer type={undefined} sx={{ mb: 4}}>
           <FeatureBlock 
             title="Intuitif"
             icon={<PeopleIcon />}
@@ -67,7 +67,7 @@ export default function HomePage(): JSX.Element {
         </FeatureBlocksContainer>
       </FeatureContainer>
       <BigSection
-        title="Building a better tomorrow, today"
+        title="La référence en matière d'Immo"
         subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
       />
       <Container sx={{ display: "flex", justifyContent: "center", mb: 16 }}>
@@ -75,8 +75,8 @@ export default function HomePage(): JSX.Element {
       </Container>
       <Box sx={{ mb: 4 }}>
         <BigSection
-          title="Our clients love us"
-          subtitle="Lorem sed risus ultricies tristique nulla aliquet. Vitae nunc sed velit dignissim sodales ut."
+          title="Les annonces"
+          subtitle="Voici les annonces de ta région :"
         />
       </Box>
       <Box sx={{ mb: 8 }}>

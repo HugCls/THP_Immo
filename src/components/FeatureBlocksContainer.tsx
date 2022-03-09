@@ -2,6 +2,7 @@ import React from "react";
 import { Grid } from "@material-ui/core";
 
 interface Props {
+  type: any
   children: React.ReactNodeArray;
 }
 
