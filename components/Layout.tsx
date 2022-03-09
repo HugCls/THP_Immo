@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import React, { ReactNode } from "react";
-import NavBar from "./navbar";
+import NavBar from "../src/components/layout/navbar";
 
 type Props = {
   children: ReactNode;

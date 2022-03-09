@@ -6,6 +6,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import createCache from "@emotion/cache";
 import theme from "../theme";
 import Layout from "../components/layout/Layout";
+import { SessionProvider } from "next-auth/react";
 
 export const cache = createCache({ key: "css", prepend: true });
 
@@ -22,12 +23,14 @@ export default function MyApp(props: AppProps): JSX.Element {
 
   return (
     <CacheProvider value={cache}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </ThemeProvider>
+      <SessionProvider session={pageProps.session}>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </ThemeProvider>
+      </SessionProvider>
     </CacheProvider>
   );
 }
