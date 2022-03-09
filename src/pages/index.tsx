@@ -33,7 +33,7 @@ export default function HomePage(): JSX.Element {
         {/* </Link> */}
       </HeroSection>
       <FeatureContainer>
-        <FeatureBlocksContainer type={undefined} sx={{ mb: 4}}>
+        <FeatureBlocksContainer>
           <FeatureBlock 
             title="Intuitif"
             icon={<PeopleIcon />}

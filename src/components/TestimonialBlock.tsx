@@ -15,17 +15,17 @@ export default function TestimonialBlock({ testimonial }: Props): JSX.Element {
             <Grid item>
               <Avatar
                 variant="circular"
-                alt={testimonial.name}
+                alt={testimonial.title}
                 src={testimonial.image}
               />
             </Grid>
           ) : null}
           <Grid item xs>
-            <Typography variant="h4">{testimonial.name}</Typography>
+            <Typography variant="h4">{testimonial.title}</Typography>
             <Typography variant="caption">{testimonial.title}</Typography>
           </Grid>
         </Grid>
-        <Typography variant="body2">{testimonial.content}</Typography>
+        <Typography variant="body2">{testimonial.description}</Typography>
       </Card>
     </Grid>
   );
