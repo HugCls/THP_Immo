@@ -11,7 +11,7 @@ import BigSection from "../components/BigSection";
 import Image from "next/image";
 import TestimonialSection from "../components/TestimonialSection";
 import { testimonials } from "../data/testimonials";
-
+import Hero8 from '../../public/hero-8.jpg'
 
 export default function HomePage(): JSX.Element {
   return (
@@ -19,7 +19,7 @@ export default function HomePage(): JSX.Element {
       <HeroSection
         title="THP Immo"
         subtitle="Vendez. Achetez. En toute simplicité."
-        image="/assets/hero-8.svg"
+        image={Hero8}
       >
         {/* <Link href="/react" passHref> */}
         <Button variant="contained" disableElevation sx={{ mr: 2, mt: 2 }}>

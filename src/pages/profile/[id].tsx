@@ -1,10 +1,10 @@
-import Layout from "../../components/Layout"
 import { useSession } from "next-auth/react";
 import { useRef, useState } from "react";
-import models from "../../lib/models";
+import models from "../../../lib/models";
 import axios from "axios";
 import { deserialize, serialize } from "superjson";
-import { Button, FormGroup, TextField, Typography } from "@mui/material";
+import { Box, Button, FormGroup, TextField, Typography } from "@mui/material";
+import BigSection from "../../components/BigSection";
 
 import type { User } from "@prisma/client";
 
@@ -46,22 +46,22 @@ export default function Profile({ rawUser }) {
   }
 
   return (
-    <Layout>
-      <h1>Signed in as {session.user.email} </h1>
-      {/* <FormGroup sx={{width: '50%', display:'flex', flexDirection: 'column'}}  >
-        <Typography variant='h5'>Nouveau message</Typography>
-        <TextField sx={{marginTop: 2}} name="text" id="text" label="text" value={text} onChange={onTextChange}/>
-        <Button variant="contained" color="primary" type="submit" sx={{marginTop: 2}}>Submit</Button>
-      </FormGroup> */}
-      <form ref={formRef}>
-        <input defaultValue={user?.name} name="editName" type="text" />
-        <input defaultValue={user?.email} name="editEmail" type="text" />
-        <input defaultValue={user?.image} name="editImage" type="text" />
-        <button disabled={disable} className="btn" onClick={(e) => editProfile(e)}>
-          Save
-        </button>
-      </form>
-    </Layout>
+      <Box sx={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+        <h1>Signed in as {session.user.email} </h1>
+        {/* <FormGroup sx={{width: '50%', display:'flex', flexDirection: 'column'}}  >
+          <Typography variant='h5'>Nouveau message</Typography>
+          <TextField sx={{marginTop: 2}} name="text" id="text" label="text" value={text} onChange={onTextChange}/>
+          <Button variant="contained" color="primary" type="submit" sx={{marginTop: 2}}>Submit</Button>
+        </FormGroup> */}
+        <form ref={formRef}>
+          <input defaultValue={user?.name} name="editName" type="text" />
+          <input defaultValue={user?.email} name="editEmail" type="text" />
+          <input defaultValue={user?.image} name="editImage" type="text" />
+          <button disabled={disable} className="btn" onClick={(e) => editProfile(e)}>
+            Save
+          </button>
+        </form>
+      </Box>
   )
 }
 

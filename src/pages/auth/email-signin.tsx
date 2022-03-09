@@ -1,12 +1,14 @@
+import { Box } from "@mui/system"
 import { getCsrfToken } from "next-auth/react"
-import Layout from "../../components/Layout"
+
 
 export default function SignIn({ csrfToken }) {
 
   
 
   return (
-    <Layout>
+    <Box sx={{mt: 8, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+      <h1>Inscrivez-vous en indiquant votre email </h1>
       <form method="post" action="/api/auth/signin/email">
         <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
         <label>
@@ -15,7 +17,7 @@ export default function SignIn({ csrfToken }) {
         </label>
         <button type="submit">Sign in with Email</button>
       </form>
-    </Layout>
+    </Box>
   )
 }
 

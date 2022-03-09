@@ -1,6 +1,6 @@
 import { useEffect } from "react"
-import Layout from "../components/Layout"
-import useFetchGet from "../src/hooks/useFetch"
+import Layout from "../components/layout/Layout"
+import useFetchGet from "../hooks/useFetch"
 
 const PageContact = () => {
 
@@ -9,7 +9,7 @@ const PageContact = () => {
   console.log(data)
 
   return (
-    <Layout><h1>Contact</h1></Layout>
+    <h1>Contact</h1>
   )
 }
 
