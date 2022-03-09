@@ -1,11 +1,11 @@
 import React from "react";
 import { GetServerSideProps } from "next";
-import ReactMarkdown from "react-markdown";
-import Layout from "../../../components/Layout";
 import Router from "next/router";
-import { PostProps } from "../../../components/Post";
-import prisma from '../../../lib/prisma'
+import { PostProps } from "../../components/Post";
+import prisma from '../../lib/prisma'
 import { useSession } from "next-auth/react";
+import { Container, Avatar, Card, Box, Grid } from "@mui/material";
+import { deepOrange } from "@mui/material/colors";
 
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
@@ -51,40 +51,33 @@ const Post: React.FC<PostProps> = (props) => {
   }
 
   return (
-    <Layout>
-      <div>
-        <h2>{title}</h2>
-        <p>By {props?.author?.name || "Unknown author"}</p>
-        <ReactMarkdown children={props.content} />
+
+    <Container sx={{}}>
+      <Grid container spacing={2}>
+        <Grid item xs={6}>
+          <img width={500} src="https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="house" />
+        </Grid>
+        <Card sx={{ ml: 20, p: 2, height: 150, m: 10 }}>
+          <Box sx={{ display: 'flex' }} >
+            <Avatar sx={{ bgcolor: deepOrange[500] }}>{props?.author?.name[0] || "X"}</Avatar>
+            <p>{props?.author?.name || "Unknown author"}</p>
+          </Box>
+          <p>Email : <a href="`mailto:${{props?.author?.email || 'Unknown email'}}`">{props?.author?.email || "Unknown email"}</a></p>
+        </Card>
+        <Grid item xs={12}>
+          <h2>{title}</h2>
+          <p>{props.content}</p>
+          <p><b>Ville: </b>{props.city}</p>
+        </Grid>
         {!props.published && userHasValidSession && postBelongsToUser && (
           <button onClick={() => publishPost(props.id)}>Publish</button>
         )}
         {userHasValidSession && postBelongsToUser && (
           <button onClick={() => deletePost(props.id)}>Delete</button>
         )}
-      </div>
-      <style jsx>{`
-        .page {
-          background: white;
-          padding: 2rem;
-        }
+      </Grid>
+    </Container>
 
-        .actions {
-          margin-top: 2rem;
-        }
-
-        button {
-          background: #ececec;
-          border: 0;
-          border-radius: 0.125rem;
-          padding: 1rem 2rem;
-        }
-
-        button + button {
-          margin-left: 1rem;
-        }
-      `}</style>
-    </Layout>
   );
 };
 

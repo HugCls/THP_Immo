@@ -1,4 +1,4 @@
-import models from "../../../lib/models";
+import models from "../../lib/models";
 
 export default async (req, res) => {
   const {

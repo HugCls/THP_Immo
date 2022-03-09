@@ -1,6 +1,6 @@
 import { useSession } from "next-auth/react";
 import { useRef, useState } from "react";
-import models from "../../../lib/models";
+import models from "../../lib/models";
 import axios from "axios";
 import { deserialize, serialize } from "superjson";
 import { Box, Button, FormGroup, TextField, Typography } from "@mui/material";
