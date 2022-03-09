@@ -33,12 +33,13 @@ const NavBar: React.FC = () => {
   }
 
   if (session) {
+    // console.log(session)
     right = (
       <div>
         <button onClick={() => signOut({callbackUrl:"/"})}>
           <a>Log out</a>
       </button>
-      <Link href="/profile"><Button variant='contained' sx={{margin: 2}}>Profile</Button></Link>
+      <Link href={"/profile/" + session.user.id}><Button variant='contained' sx={{margin: 2}}>Profile</Button></Link>
       </div>
       
     )
