@@ -1,14 +1,15 @@
+import { Box } from "@mui/material";
 import React, { ReactNode } from "react";
-import Header from "./Header";
+import NavBar from "./navbar";
 
 type Props = {
   children: ReactNode;
 };
 
 const Layout: React.FC<Props> = (props) => (
-  <div>
-    <Header />
-    <div className="layout">{props.children}</div>
+  <Box sx={{display:"flex", flexDirection: 'column', minHeight: "100vh"}}>
+    <NavBar />
+    <Box className="layout">{props.children}</Box>
     <style jsx global>{`
       html {
         box-sizing: border-box;
@@ -44,7 +45,7 @@ const Layout: React.FC<Props> = (props) => (
         padding: 0 2rem;
       }
     `}</style>
-  </div>
+  </Box>
 );
 
 export default Layout;
