@@ -6,7 +6,8 @@ import Router from "next/router";
 import { PostProps } from "../../components/Post";
 import prisma from '../../lib/prisma'
 import { useSession } from "next-auth/react";
-import { Box } from "@mui/material";
+import { Container, Avatar, Card, Box, Grid } from "@mui/material";
+import { deepOrange } from "@mui/material/colors";
 
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
@@ -53,17 +54,31 @@ const Post: React.FC<PostProps> = (props) => {
 
   return (
     <Layout>
-      <Box>
-        <h2>{title}</h2>
-        <p>{props?.author?.name || "Unknown author"}</p>
-        <ReactMarkdown children={props.content} />
-        {!props.published && userHasValidSession && postBelongsToUser && (
-          <button onClick={() => publishPost(props.id)}>Publish</button>
-        )}
-        {userHasValidSession && postBelongsToUser && (
-          <button onClick={() => deletePost(props.id)}>Delete</button>
-        )}
-      </Box>
+      <Container sx={{}}>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <img width={500} src="https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="house" />
+          </Grid>
+          <Grid item xs={6}>
+            <h2>{title}</h2>
+            <p>{props.content}</p>
+            <p>Ville: {props.city}</p>
+          </Grid>
+          <Card sx={{ml: 20}}>
+            <Box sx={{display: 'flex'}} >
+              <Avatar sx={{ bgcolor: deepOrange[500] }}>{props?.author?.name[0] || "X"}</Avatar>
+              <p>{props?.author?.name || "Unknown author"}</p>
+            </Box>
+            <p>Email : <a href="`mailto:${{props?.author?.email || 'Unknown email'}}`">{props?.author?.email || "Unknown email"}</a></p>
+          </Card>
+          {!props.published && userHasValidSession && postBelongsToUser && (
+            <button onClick={() => publishPost(props.id)}>Publish</button>
+          )}
+          {userHasValidSession && postBelongsToUser && (
+            <button onClick={() => deletePost(props.id)}>Delete</button>
+          )}
+        </Grid>
+      </Container>
     </Layout>
   );
 };
