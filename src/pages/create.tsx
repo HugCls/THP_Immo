@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Router from "next/router";
+import { Box, Button, FormGroup, TextField, Typography } from "@mui/material";
 
 const Draft: React.FC = () => {
   const [title, setTitle] = useState("");
@@ -21,8 +22,21 @@ const Draft: React.FC = () => {
   };
 
   return (
+    /*
+    <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+      <h1>Signed in as {session.user.email} </h1>
+      <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
+      <form ref={formRef}>
+        <FormGroup sx={{ mt: 8, display: 'flex', flexDirection: 'column' }}  >
+          <TextField label="Email" type="editEmail" id="editEmail" name="editEmail" defaultValue={user?.email} sx={{ mt: 2 }} />
+          <TextField label="Nom" type="editName" id="editName" name="editName" defaultValue={user?.name} sx={{ mt: 2 }} />
+          <TextField label="Lien vers une image" type="editImage" id="editImage" name="editImage" defaultValue={user?.image} sx={{ mt: 2 }} />
+          <Button sx={{ mt: 2 }} type="submit" onClick={(e) => editProfile(e)}>Enregistrer</Button>
+        </FormGroup>
+      </form>
+    </Box>
     <div>
-      <div>
+     {  <div>
         <form onSubmit={submitData}>
           <h1>New Draft</h1>
           <input
@@ -45,35 +59,8 @@ const Draft: React.FC = () => {
           </a>
         </form>
       </div>
-      <style jsx>{`
-        .page {
-          background: white;
-          padding: 3rem;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        input[type="text"],
-        textarea {
-          width: 100%;
-          padding: 0.5rem;
-          margin: 0.5rem 0;
-          border-radius: 0.25rem;
-          border: 0.125rem solid rgba(0, 0, 0, 0.2);
-        }
-
-        input[type="submit"] {
-          background: #ececec;
-          border: 0;
-          padding: 1rem 2rem;
-        }
-
-        .back {
-          margin-left: 1rem;
-        }
-      `}</style>
-    </div>
+    </div> */
+    <></>
   );
 };
 
