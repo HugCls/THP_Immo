@@ -9,7 +9,7 @@ import {
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
-import { flexbox } from "@mui/system";
+import Image from "next/image";
 
 export default function Header(): JSX.Element {
   const router = useRouter();
@@ -48,7 +48,7 @@ export default function Header(): JSX.Element {
               sx={{ mr: 2 }}
               color={router.pathname === "/profile/" + session.user.id ? "primary" : "secondary"}
             >
-              Profile
+              <Image src={session.user.image} layout='fill' />Profile
             </Button>
           </Link>
           <Button
