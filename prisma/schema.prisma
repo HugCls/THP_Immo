@@ -7,10 +7,18 @@ datasource db {
   url      = "file:./dev.db"
 }
 
+//datasource db {
+//  provider = "postgresql"
+//  url      = env("DATABASE_URL")
+//}
+
 model Post {
   id        Int     @id @default(autoincrement())
   title     String
   content   String?
+  price     Int
+  city      String
+  createdAt DateTime  @default(now())
   published Boolean @default(false)
   author    User?   @relation(fields: [authorId], references: [id])
   authorId  Int?
