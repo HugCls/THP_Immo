@@ -1,38 +1,36 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
+import { API_URL } from "../config";
 
 
-const useRequest = (method, resource, body) => {
-  const API_URL = process.env.BASE_URL
-
+const useRequest = (method, resource) => {
+  const URL = `${API_URL}/${resource}`
   const [isLoading, setIsLoading] = useState(false);
   const [apiData, setApiData] = useState(null);
-  const [serverError, setServerError] = useState(null);
+  const [serverError, setServerError] = useState(false);
 
-  useEffect(() => {
+  const doFetch = async (body) => {
     setIsLoading(true);
-    const fetchData = async () => {
-      try {
-        const resp = await axios({
-          method: method,
-          url: API_URL + resource,
-          data: body
-        });
-        const data = await resp?.data;
+    setServerError(false);
+    try {
+      const resp = await axios({
+        method: method,
+        headers: { "Content-Type": "application/json" },
+        url: URL,
+        data: body
+      });
+      const data = await resp?.data;
 
-        setApiData(data);
-        setIsLoading(false);
-      } catch (error) {
-        setServerError(error);
-        setIsLoading(false);
-      }
-    };
+      setApiData(data);
+    } catch (error) {
+      setServerError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-    fetchData();
-  }, [resource, method, body]);
 
-  return { isLoading, apiData, serverError };
+  return { isLoading, doFetch, serverError, apiData };
 };
-
 
 export default useRequest

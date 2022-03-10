@@ -9,12 +9,11 @@ import {
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
-import Image from "next/image";
 
 export default function Header(): JSX.Element {
   const router = useRouter();
   const {data: session, status} = useSession();
-
+  
   const navLinks = [
     { title: `THP immo`, path: `/` },
     { title: `Contact`, path: `/contact` }
@@ -41,14 +40,13 @@ export default function Header(): JSX.Element {
 
   if (session) {
     right = (
-        <Box sx={{display: 'flex', flexDirection:'column', alignContent: 'center'}}>
-          <b>{session.user.name ? session.user.name : session.user.email }</b>
+        <Box>
           <Link href={"/profile/" + session.user.id}  passHref>
             <Button
               sx={{ mr: 2 }}
-              color={router.pathname === "/profile/" + session.user.id ? "primary" : "secondary"}
+              color={router.pathname.includes("/profile/") ? "primary" : "secondary"}
             >
-              <Image src={session.user.image} layout='fill' />Profile
+              {session.user.name ? session.user.name : session.user.email }
             </Button>
           </Link>
           <Button
@@ -67,14 +65,9 @@ export default function Header(): JSX.Element {
         backgroundColor: (theme) => theme.palette.background.default,
       }}
     >
-      <Container maxWidth="md" sx={{ py: 1 }}>
+      <Container maxWidth="md" sx={{ py: 1, display: 'flex', flexDirection: 'row' }}>
         <Grid container alignItems="center">
-          <Grid item xs={2}>
             <Typography variant="body1" align="center" sx={{ fontWeight: 600 }}>
-              THP immo
-            </Typography>
-          </Grid>
-          <Grid container item xs={10} justifyContent="flex-end">
             {navLinks.map((link,i) => 
               <Link key={i} href={link.path} passHref>
                 <Button
@@ -84,10 +77,12 @@ export default function Header(): JSX.Element {
                   {link.title}
                 </Button>
               </Link>
-              )}
+            )}
+            </Typography>
+          </Grid>
+          <Grid container item xs={10} justifyContent="flex-end">
             {right}
           </Grid>
-        </Grid>
       </Container>
       <Divider />
     </Box>

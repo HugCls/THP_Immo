@@ -18,7 +18,7 @@ export default function HomePage(): JSX.Element {
       <HeroSection
         title="THP Immo"
         subtitle="Vendez. Achetez. En toute simplicité."
-        image='/hero-8.jpg'
+        image="/hero-8.jpg"
       >
         {/* <Link href="/react" passHref> */}
         <Button variant="contained" disableElevation sx={{ mr: 2, mt: 2 }}>
