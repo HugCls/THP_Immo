@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const useRequest = (method, url, body) => {
+
+const useRequest = (method, resource, body) => {
+  const API_URL = process.env.BASE_URL
+
   const [isLoading, setIsLoading] = useState(false);
   const [apiData, setApiData] = useState(null);
   const [serverError, setServerError] = useState(null);
@@ -12,7 +15,7 @@ const useRequest = (method, url, body) => {
       try {
         const resp = await axios({
           method: method,
-          url: url,
+          url: API_URL + resource,
           data: body
         });
         const data = await resp?.data;
@@ -26,7 +29,7 @@ const useRequest = (method, url, body) => {
     };
 
     fetchData();
-  }, [url, method, body]);
+  }, [resource, method, body]);
 
   return { isLoading, apiData, serverError };
 };
