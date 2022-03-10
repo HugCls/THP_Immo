@@ -1,6 +1,5 @@
 import {
   Typography,
-  Container,
   Grid,
   Box,
   Divider,
@@ -9,13 +8,12 @@ import {
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
-import { flexbox } from "@mui/system";
 
 export default function Header(): JSX.Element {
   const router = useRouter();
   const {data: session, status} = useSession();
-
-  const navLinks = [
+  
+  let navLinks = [
     { title: `THP immo`, path: `/` },
     { title: `Contact`, path: `/contact` }
   ]
@@ -27,6 +25,7 @@ export default function Header(): JSX.Element {
   }
 
   if (!session) {
+    
     right = (
       <Link href="/auth/email-signin"  passHref>
         <Button
@@ -40,15 +39,16 @@ export default function Header(): JSX.Element {
   }
 
   if (session) {
+
+    navLinks.push({ title: `Mes annonces`, path: `/p/my_posts` },{ title: `Créer une annonce`, path: `/p/create` }) 
     right = (
-        <Box sx={{display: 'flex', flexDirection:'column', alignContent: 'center'}}>
-          <b>{session.user.name ? session.user.name : session.user.email }</b>
+        <Box>
           <Link href={"/profile/" + session.user.id}  passHref>
             <Button
               sx={{ mr: 2 }}
-              color={router.pathname === "/profile/" + session.user.id ? "primary" : "secondary"}
+              color={router.pathname.includes("/profile/") ? "primary" : "secondary"}
             >
-              Profile
+              {session.user.name ? session.user.name : session.user.email }
             </Button>
           </Link>
           <Button
@@ -67,14 +67,9 @@ export default function Header(): JSX.Element {
         backgroundColor: (theme) => theme.palette.background.default,
       }}
     >
-      <Container maxWidth="md" sx={{ py: 1 }}>
-        <Grid container alignItems="center">
-          <Grid item xs={2}>
+      <Box sx={{ py: 1, display: 'flex', flexDirection: 'row' }}>
+        <Grid width='100%' alignItems="center">
             <Typography variant="body1" align="center" sx={{ fontWeight: 600 }}>
-              THP immo
-            </Typography>
-          </Grid>
-          <Grid container item xs={10} justifyContent="flex-end">
             {navLinks.map((link,i) => 
               <Link key={i} href={link.path} passHref>
                 <Button
@@ -84,11 +79,13 @@ export default function Header(): JSX.Element {
                   {link.title}
                 </Button>
               </Link>
-              )}
+            )}
+            </Typography>
+          </Grid>
+          <Grid container item xs={10} justifyContent="flex-end">
             {right}
           </Grid>
-        </Grid>
-      </Container>
+      </Box>
       <Divider />
     </Box>
   );

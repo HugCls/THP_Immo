@@ -3,7 +3,7 @@ import axios from "axios";
 
 const useFetchGet = (resource) => {
   
-  const API_URL = 'http://127.0.0.1:3000'
+  const API_URL = process.env.BASE_URL
 
   const [isLoading, setIsLoading] = useState(false);
   const [apiData, setApiData] = useState(null);

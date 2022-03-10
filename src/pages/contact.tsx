@@ -6,7 +6,7 @@ const PageContact = () => {
 
   const {isLoading, apiData: data, serverError } = useFetchGet('/api/post/getAllPosts')
 
-  console.log(data)
+  // console.log(data)
 
   return (
     <h1>Contact</h1>

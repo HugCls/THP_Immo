@@ -3,7 +3,7 @@ import StarIcon from "@material-ui/icons/Star";
 import PeopleIcon from "@material-ui/icons/People";
 import Page from "../components/layout/Page";
 import HeroSection from "../components/HeroSection";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import FeatureContainer from "../components/FeatureContainer";
 import FeatureBlocksContainer from "../components/FeatureBlocksContainer";
 import FeatureBlock from "../components/FeatureBlock";
@@ -11,8 +11,32 @@ import BigSection from "../components/BigSection";
 import Image from "next/image";
 import TestimonialSection from "../components/TestimonialSection";
 import { testimonials } from "../data/testimonials";
+import useFetchGet from "../hooks/useFetch";
+import useRequest from "../hooks/useRequest";
 
 export default function HomePage(): JSX.Element {
+
+  const { isLoading, serverError, doFetch, apiData } = useRequest("GET", "post");
+
+  const[posts, setPosts] = useState([])
+  const [displayPosts, setDisplayPosts] = useState(<TestimonialSection testimonials={[]} />)
+
+  console.log(isLoading)
+  useEffect(() => {
+    doFetch()
+    console.log(isLoading)
+  }, [])
+
+  useEffect(() => {
+    if (isLoading === false) {
+      setPosts(apiData)
+      console.log(posts)
+    }
+    if(posts){
+      setDisplayPosts(<TestimonialSection testimonials={posts} />)
+    }
+  },[isLoading, posts]);
+
   return (
     <Page maxWidth={false}>
       <HeroSection
@@ -79,8 +103,16 @@ export default function HomePage(): JSX.Element {
         />
       </Box>
       <Box sx={{ mb: 8 }}>
-        <TestimonialSection testimonials={testimonials} />
+        {displayPosts}
       </Box>
     </Page>
   );
 }
+
+// export async function getServerSideProps(context) {
+  
+//   return {
+//     props: { posts },
+//   }
+
+// }

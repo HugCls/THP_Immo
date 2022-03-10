@@ -5,6 +5,7 @@ import models from "../../lib/models";
 import axios from "axios";
 import { deserialize, serialize } from "superjson";
 import { Box, Button, FormGroup, TextField, Typography } from "@mui/material";
+import useRequest from "../../hooks/useRequest";
 
 import type { User } from "@prisma/client";
 
@@ -16,11 +17,13 @@ export default function Profile({ session, rawUser, csrfToken }) {
   const isUser = !!session?.user
   const formRef = useRef(null);
   const [disable, setDisable] = useState(false);
-
+  const { isLoading, serverError, doFetch } = useRequest(
+    "PUT",
+    "edit_user_profile"
+  );
 
   const editProfile = async (e) => {
     e.preventDefault()
-    setDisable(true)
     const {
       editName,
       editEmail,
@@ -29,16 +32,9 @@ export default function Profile({ session, rawUser, csrfToken }) {
     const name = editName.value;
     const email = editEmail.value;
     const image = editImage.value;
-
-    await axios.put("/api/edit_user_profile", {
-      id: user.id,
-      name,
-      email,
-      image
-    })
+    const saveData = {id: user.id, name, email, image}
+    doFetch(saveData)
     
-    setDisable(false);
-
   }
   if (!isUser) {
     return (
