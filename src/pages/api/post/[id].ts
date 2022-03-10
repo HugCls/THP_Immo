@@ -52,8 +52,34 @@ const deleteONE = async (postId, response) => {
   }
 }
 
+const updateONE = async (body, postId, response) => {
+  const data: Prisma.PostCreateInput = { 
+    title: body.title,
+    content: body.content || null,
+    price: body.price,
+    city: body.city,
+    published: body.published || false,
+    author: body.authorId ? {connect: {id: body.authorId}} : null
+  };
+  try {
+    const result = await models.post.update({
+      where: {
+        id: postId,
+      },
+      data: {
+        ...data,
+      },
+    });
+    response.status(200).json(result);
+  } catch (err) {
+    console.log(err);
+    response.status(403).json({ err: "Error occured while adding a new post." });
+  }
+
+}
+
 export default async (request: NextApiRequest, response: NextApiResponse) => {
-  const {method, query } = request;
+  const {method, query, body } = request;
   const postId = Number(query.id);
 
   if (method === 'GET') {
@@ -64,6 +90,12 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
 
   if (method === 'DELETE') {
     deleteONE(postId, response)
+
+    return
+  }
+
+  if (method === 'PUT') {
+    updateONE(postId, body,response)
 
     return
   }

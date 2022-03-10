@@ -1,6 +1,5 @@
 import {
   Typography,
-  Container,
   Grid,
   Box,
   Divider,
@@ -14,7 +13,7 @@ export default function Header(): JSX.Element {
   const router = useRouter();
   const {data: session, status} = useSession();
   
-  const navLinks = [
+  let navLinks = [
     { title: `THP immo`, path: `/` },
     { title: `Contact`, path: `/contact` }
   ]
@@ -26,6 +25,7 @@ export default function Header(): JSX.Element {
   }
 
   if (!session) {
+    
     right = (
       <Link href="/auth/email-signin"  passHref>
         <Button
@@ -39,6 +39,8 @@ export default function Header(): JSX.Element {
   }
 
   if (session) {
+
+    navLinks.push({ title: `Mes annonces`, path: `/p/my_posts` },{ title: `Créer une annonce`, path: `/p/create` }) 
     right = (
         <Box>
           <Link href={"/profile/" + session.user.id}  passHref>
@@ -65,8 +67,8 @@ export default function Header(): JSX.Element {
         backgroundColor: (theme) => theme.palette.background.default,
       }}
     >
-      <Container maxWidth="md" sx={{ py: 1, display: 'flex', flexDirection: 'row' }}>
-        <Grid container alignItems="center">
+      <Box sx={{ py: 1, display: 'flex', flexDirection: 'row' }}>
+        <Grid width='100%' alignItems="center">
             <Typography variant="body1" align="center" sx={{ fontWeight: 600 }}>
             {navLinks.map((link,i) => 
               <Link key={i} href={link.path} passHref>
@@ -83,7 +85,7 @@ export default function Header(): JSX.Element {
           <Grid container item xs={10} justifyContent="flex-end">
             {right}
           </Grid>
-      </Container>
+      </Box>
       <Divider />
     </Box>
   );
