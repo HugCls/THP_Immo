@@ -8,7 +8,6 @@ import useRequest from "../../hooks/useRequest"
 
 const CreatePost = ({csrfToken, session}) => {
   const formRef = useRef(null);
-  const [disable, setDisable] = useState(false);
   const { isLoading, serverError, doFetch } = useRequest(
     "POST",
     "post"

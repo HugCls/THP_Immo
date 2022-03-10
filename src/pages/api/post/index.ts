@@ -39,7 +39,7 @@ const create = async (body, response) => {
 
 export default async (request: NextApiRequest, response: NextApiResponse) => {
   const {body, method, query } = request;
-  console.log(query)
+  // console.log(query)
   if (method === 'GET') {
     getALL(response)
     

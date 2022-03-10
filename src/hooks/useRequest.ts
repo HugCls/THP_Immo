@@ -9,7 +9,7 @@ const useRequest = (method, resource) => {
   const [apiData, setApiData] = useState(null);
   const [serverError, setServerError] = useState(false);
 
-  const doFetch = async (body) => {
+  const doFetch = async (body = null) => {
     setIsLoading(true);
     setServerError(false);
     try {
