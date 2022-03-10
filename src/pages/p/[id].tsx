@@ -52,12 +52,14 @@ const Post: React.FC<PostProps> = (props) => {
 
   return (
 
-    <Container sx={{}}>
+    <Container sx={{mt: 5}}>
       <Grid container spacing={2}>
         <Grid item xs={6}>
-          <img width={500} src="https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="house" />
+          <Box sx={{ borderRadius: 16}}>
+            <img  width={500} src="https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="house" />
+          </Box>
         </Grid>
-        <Card sx={{ ml: 20, p: 2, height: 150, m: 10 }}>
+        <Card sx={{ ml: 20, p: 2, height: 150, m: 10, backgroundColor: "#EDE7F6" }}>
           <Box sx={{ display: 'flex' }} >
             <Avatar sx={{ bgcolor: deepOrange[500] }}>{props?.author?.name[0] || "X"}</Avatar>
             <p>{props?.author?.name || "Unknown author"}</p>
@@ -66,8 +68,8 @@ const Post: React.FC<PostProps> = (props) => {
         </Card>
         <Grid item xs={12}>
           <h2>{title}</h2>
-          <p>{props.content}</p>
           <p><b>Ville: </b>{props.city}</p>
+          <p>{props.content}</p>
         </Grid>
         {!props.published && userHasValidSession && postBelongsToUser && (
           <button onClick={() => publishPost(props.id)}>Publish</button>
