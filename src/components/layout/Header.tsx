@@ -18,7 +18,7 @@ export default function Header(): JSX.Element {
     { title: `Contact`, path: `/contact` }
   ]
 
-  let right = null;
+  let right = (<></>);
 
   if (status === 'loading') {
     right = (<p>Validating session ...</p>)

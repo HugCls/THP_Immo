@@ -1,14 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
 import Router from "next/router";
-import { PostProps } from "../../../components/Post";
-import prisma from '../../../lib/prisma'
-import { getCsrfToken, getSession, useSession } from "next-auth/react";
-import { Container, Avatar, Card, Box, Grid } from "@mui/material";
-import { deepOrange } from "@mui/material/colors";
+import { getCsrfToken, getSession } from "next-auth/react";
+import { Box } from "@mui/material";
 import { Button, TextareaAutosize, TextField, Typography, FormGroup } from "@material-ui/core";
 import useRequest from "../../../hooks/useRequest";
 import models from "../../../lib/models";
-
 
 const PostEdit = ({ csrfToken= null, session = null, post }) => {
   
@@ -17,7 +13,6 @@ const PostEdit = ({ csrfToken= null, session = null, post }) => {
   const formRef = useRef(null);
 
   if (session && post) {
-    
     
     const submitData = async (e: React.SyntheticEvent) => {
       e.preventDefault();
@@ -31,6 +26,8 @@ const PostEdit = ({ csrfToken= null, session = null, post }) => {
       const saveData = {title: title.value, content: content.value, city: city.value, price:parseInt(price.value), authorId: session.user.id}
   
       doFetch(saveData)
+
+      Router.push("/p/my_posts")
         
     };
     return (

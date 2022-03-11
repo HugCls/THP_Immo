@@ -22,7 +22,7 @@ const create = async (body, response) => {
     price: body.price,
     city: body.city,
     published: body.published || false,
-    author: body.authorId ? {connect: {id: body.authorId}} : null
+    author: body.authorId ? {connect: {id: body.authorId}} : undefined
   };
   try {
     const result = await models.post.create({

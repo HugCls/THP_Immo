@@ -1,4 +1,5 @@
 import { Grid, Container } from "@material-ui/core";
+import { Post } from "@prisma/client";
 import { useEffect } from "react";
 import Testimonial from "../interfaces/Testimonial";
 import TestimonialBlock from "./TestimonialBlock";
@@ -16,7 +17,7 @@ export default function TestimonialSection({testimonials=[]}: Props): JSX.Elemen
   return (
     <Container maxWidth="md">
       <Grid container spacing={2}>
-        {testimonials.map((testimonial: undefined, index) => (
+        {testimonials.map((testimonial, index) => (
           <TestimonialBlock testimonial={testimonial} key={index} />
         ))}
       </Grid>

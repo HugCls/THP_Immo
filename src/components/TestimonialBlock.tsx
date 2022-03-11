@@ -11,7 +11,7 @@ interface Props {
 export default function TestimonialBlock({ testimonial }): JSX.Element {
   
   const { data: session, status } = useSession()
-  const [linkEdit, setLinkEdit] = useState(null);
+  const [linkEdit, setLinkEdit] = useState<any>();
 
   useEffect(() => {
     if (status === "authenticated") {
