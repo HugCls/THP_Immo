@@ -20,8 +20,8 @@ model Post {
   city      String
   createdAt DateTime  @default(now())
   published Boolean @default(false)
-  author    User?   @relation(fields: [authorId], references: [id])
-  authorId  Int?
+  author    User   @relation(fields: [authorId], references: [id])
+  authorId  Int
 }
 
 model Account {

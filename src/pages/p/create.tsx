@@ -1,10 +1,10 @@
 import { Button, FormGroup, TextareaAutosize, TextField, Typography } from "@material-ui/core"
 import { Box } from "@mui/system"
 import { getCsrfToken, getSession } from "next-auth/react"
-import { useRef, useState } from "react"
+import { useRef } from "react"
 
-import type { Post } from "@prisma/client"
 import useRequest from "../../hooks/useRequest"
+import Router from "next/router";
 
 const CreatePost = ({csrfToken, session}) => {
   const formRef = useRef(null);
@@ -24,6 +24,8 @@ const CreatePost = ({csrfToken, session}) => {
     const saveData = {title: title.value, content: content.value, city: city.value, price:parseInt(price.value), authorId: session.user.id}
 
     doFetch(saveData)
+
+    Router.push("/p/my_posts")
       
   };
 

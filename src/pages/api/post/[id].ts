@@ -32,6 +32,9 @@ const getONE = async (postId, response) => {
       where: {
         id: postId,
       },
+      include: {
+        author: true,
+      },
     })
     response.status(200).json(result);
   } catch (err) {

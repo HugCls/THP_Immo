@@ -1,17 +1,17 @@
 import React, { useEffect, useRef, useState } from "react";
-import Router from "next/router";
 import { Container, Avatar, Card, Box, Grid } from "@mui/material";
 import { deepOrange } from "@mui/material/colors";
-import { Button, TextareaAutosize, TextField, Typography, FormGroup } from "@material-ui/core";
 import useRequest from "../../hooks/useRequest";
 
+import type { Post } from "@prisma/client";
+import { PostProps } from "../../components/Post";
 
-const Post = ({ postId }) => {
+
+const viewPost = ({ postId }) => {
   
   const { isLoading, serverError, doFetch, apiData: requestPost } = useRequest("GET", `post/${postId}`);
 
-  const [post, setPost] = useState(null)
-  const formRef = useRef(null);
+  const [post, setPost] = useState<PostProps>()
 
   useEffect(() => {
     doFetch()
@@ -25,7 +25,7 @@ const Post = ({ postId }) => {
   }, [isLoading, post])
 
   if (!post){return(<h1>Wait and see</h1>)}
-
+  if (post){
    return (
 
       <Container sx={{}}>
@@ -35,10 +35,10 @@ const Post = ({ postId }) => {
           </Grid>
           <Card sx={{ ml: 20, p: 2, height: 150, m: 10 }}>
             <Box sx={{ display: 'flex' }} >
-              <Avatar sx={{ bgcolor: deepOrange[500] }}>{post?.author?.name[0] || "X"}</Avatar>
-              <p>{post?.author?.name || "Unknown author"}</p>
+              <Avatar sx={{ bgcolor: deepOrange[500] }}>{post.author.name[0] || "X"}</Avatar>
+              <p>{post.author.name}</p>
             </Box>
-            <p>Email : <a href="`mailto:${{props?.author?.email || 'Unknown email'}}`">{post?.author?.email || "Unknown email"}</a></p>
+            <p>Email : <a href="`mailto:${{post.author.email'}}`">{post.author.email || "Unknown email"}</a></p>
           </Card>
           <Grid item xs={12}>
             <h2>{post.title}</h2>
@@ -48,8 +48,8 @@ const Post = ({ postId }) => {
 
         </Grid>
       </Container>
-
     );
+  }
 };
 
 export async function getServerSideProps(context) {
@@ -61,4 +61,4 @@ export async function getServerSideProps(context) {
   }
 }
 
-export default Post;
+export default viewPost;
