@@ -10,8 +10,6 @@ import FeatureBlock from "../components/FeatureBlock";
 import BigSection from "../components/BigSection";
 import Image from "next/image";
 import TestimonialSection from "../components/TestimonialSection";
-import { testimonials } from "../data/testimonials";
-import useFetchGet from "../hooks/useFetch";
 import useRequest from "../hooks/useRequest";
 
 export default function HomePage(): JSX.Element {
@@ -19,7 +17,7 @@ export default function HomePage(): JSX.Element {
   const { isLoading, serverError, doFetch, apiData } = useRequest("GET", "post");
 
   const[posts, setPosts] = useState([])
-  const [displayPosts, setDisplayPosts] = useState(<TestimonialSection testimonials={[]} />)
+  const [displayPosts, setDisplayPosts] = useState(<TestimonialSection testimonials={[]}/>)
 
   console.log(isLoading)
   useEffect(() => {
@@ -108,11 +106,3 @@ export default function HomePage(): JSX.Element {
     </Page>
   );
 }
-
-// export async function getServerSideProps(context) {
-  
-//   return {
-//     props: { posts },
-//   }
-
-// }
