@@ -59,8 +59,10 @@ const updateONE = async (body, postId, response) => {
     price: body.price,
     city: body.city,
     published: body.published || false,
-    author: body.authorId ? {connect: {id: body.authorId}} : null
+    author: undefined
   };
+  console.log("----------", postId)
+  console.log("----------", body)
   try {
     const result = await models.post.update({
       where: {
@@ -95,7 +97,7 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
   }
 
   if (method === 'PUT') {
-    updateONE(postId, body,response)
+    updateONE(body, postId, response)
 
     return
   }
