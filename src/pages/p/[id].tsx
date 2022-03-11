@@ -7,7 +7,7 @@ import type { Post } from "@prisma/client";
 import { PostProps } from "../../components/Post";
 
 
-const Post = ({ postId }) => {
+const viewPost = ({ postId }) => {
   
   const { isLoading, serverError, doFetch, apiData: requestPost } = useRequest("GET", `post/${postId}`);
 
@@ -61,4 +61,4 @@ export async function getServerSideProps(context) {
   }
 }
 
-export default Post;
+export default viewPost;
